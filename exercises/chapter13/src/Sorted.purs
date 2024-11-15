@@ -7,11 +7,10 @@ import Test.QuickCheck.Arbitrary (class Arbitrary, arbitrary)
 
 newtype Sorted a = Sorted (Array a)
 
-sorted :: forall a. Sorted a -> Array a
+sorted ∷ ∀ a. Sorted a → Array a
 sorted (Sorted xs) = xs
 
-instance Show a => Show (Sorted a) where
-  show = show <<< sorted
+derive newtype instance Show a ⇒ Show (Sorted a)
 
-instance (Arbitrary a, Ord a) => Arbitrary (Sorted a) where
+instance (Arbitrary a, Ord a) ⇒ Arbitrary (Sorted a) where
   arbitrary = map (Sorted <<< sort) arbitrary
