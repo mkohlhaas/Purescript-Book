@@ -30,7 +30,7 @@ translate dx dy shape = shape
   }
 
 main ∷ Effect Unit
-main = void $ unsafePartial do
+main = unsafePartial do
   Just canvas ← getCanvasElementById "canvas"
   ctx ← getContext2D canvas
   setFillStyle ctx "#00F"

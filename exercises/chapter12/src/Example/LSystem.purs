@@ -27,6 +27,7 @@ lsystem
   → m s
 lsystem init prod interpret n state = go init n
   where
+  go ∷ Array a → Int → m s
   go s 0 = foldM interpret state s
   go s i = go (concatMap prod s) (i - 1)
 
@@ -66,5 +67,5 @@ main = void $ unsafePartial do
       moveTo ctx state.x state.y
       lineTo ctx x y
       pure { x, y, theta: state.theta }
-  setStrokeStyle ctx "#000"
+  setStrokeStyle ctx "#034"
   strokePath ctx $ lsystem initial productions interpret 5 initialState

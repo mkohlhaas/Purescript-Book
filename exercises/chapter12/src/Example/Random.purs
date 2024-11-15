@@ -20,10 +20,10 @@ import Graphics.Canvas
 import Partial.Unsafe (unsafePartial)
 
 main ∷ Effect Unit
-main = void $ unsafePartial do
+main = unsafePartial do
   Just canvas ← getCanvasElementById "canvas"
   ctx ← getContext2D canvas
-  setFillStyle ctx "#F00"
+  setFillStyle ctx "#157"
   setStrokeStyle ctx "#000"
   for_ (1 .. 100) \_ → do
     x ← random

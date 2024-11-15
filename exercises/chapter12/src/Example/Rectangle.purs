@@ -14,13 +14,13 @@ import Graphics.Canvas
 import Partial.Unsafe (unsafePartial)
 
 main ∷ Effect Unit
-main = void $ unsafePartial do
+main = unsafePartial do
   Just canvas ← getCanvasElementById "canvas"
   ctx ← getContext2D canvas
   setFillStyle ctx "#08F"
   fillPath ctx $ rect ctx
     { x: 250.0
     , y: 250.0
-    , width: 100.0
+    , width: 300.0
     , height: 100.0
     }

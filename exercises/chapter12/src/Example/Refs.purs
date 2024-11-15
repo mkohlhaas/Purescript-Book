@@ -8,18 +8,7 @@ import Data.Number as Number
 import Effect (Effect)
 import Effect.Console (logShow)
 import Effect.Ref as Ref
-import Graphics.Canvas
-  ( Context2D
-  , fillPath
-  , getCanvasElementById
-  , getContext2D
-  , rect
-  , rotate
-  , scale
-  , setFillStyle
-  , translate
-  , withContext
-  )
+import Graphics.Canvas (Context2D, fillPath, getCanvasElementById, getContext2D, rect, rotate, scale, setFillStyle, translate, withContext)
 import Partial.Unsafe (unsafePartial)
 import Web.DOM.Document (toParentNode)
 import Web.DOM.Element (toEventTarget)
@@ -39,7 +28,7 @@ render ctx count = void do
     , width: 600.0
     , height: 600.0
     }
-  setFillStyle ctx "#0F0"
+  setFillStyle ctx "#052"
   withContext ctx do
     let scaleX = Number.sin (toNumber count * Number.tau / 8.0) + 1.5
     let scaleY = Number.sin (toNumber count * Number.tau / 12.0) + 1.5
@@ -55,7 +44,7 @@ render ctx count = void do
       }
 
 main ∷ Effect Unit
-main = void $ unsafePartial do
+main = unsafePartial do
   Just canvas ← getCanvasElementById "canvas"
   ctx ← getContext2D canvas
   clickCount ← Ref.new 0
@@ -64,6 +53,6 @@ main = void $ unsafePartial do
   Just node ← querySelector (QuerySelector "#canvas") doc
   clickListener ← eventListener $ \_ → do
     logShow "Mouse clicked!"
-    count ← Ref.modify (\count → count + 1) clickCount
+    count ← Ref.modify (_ + 1) clickCount
     render ctx count
   addEventListener (EventType "click") clickListener true (toEventTarget node)
